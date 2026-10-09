@@ -1,5 +1,7 @@
 # Three Cities
 
+**Live site: https://pinklesoni.github.io/three-cities/**
+
 Reader site for Pinkle's romcom trilogy: the cast, the setup, the three books, an author's note and an open comment wall.
 
 Plain HTML, no build step. Comments are stored in Supabase (free tier).
