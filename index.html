@@ -324,7 +324,12 @@ footer{padding-block:64px 40px;text-align:center;font-size:var(--step--1);color:
   var cfg=window.THREE_CITIES_CONFIG||{};
   var READY=/^https:\/\/.+\.supabase\.co$/.test(cfg.supabaseUrl||"")&&cfg.supabaseAnonKey&&cfg.supabaseAnonKey.indexOf("PASTE")<0;
   var API=READY?cfg.supabaseUrl+"/rest/v1/comments":"";
-  var HEADERS=READY?{apikey:cfg.supabaseAnonKey,Authorization:"Bearer "+cfg.supabaseAnonKey}:{};
+  var HEADERS={};
+  if(READY){
+    HEADERS.apikey=cfg.supabaseAnonKey;
+    // Legacy anon keys are JWTs and also go in Authorization; new sb_publishable_ keys must not.
+    if(/^eyJ/.test(cfg.supabaseAnonKey))HEADERS.Authorization="Bearer "+cfg.supabaseAnonKey;
+  }
   var BOOKS={all:"Whole trilogy",leaving:"The Leaving",return:"The Return",staying:"The Staying"};
   var PAGE=50,offset=0;
   var $=function(id){return document.getElementById(id)};
